@@ -1,4 +1,5 @@
 const Tweet = require("../../models/tweet");
+const mongoose = require("mongoose");
 
 module.exports.createTweet = async () => {
   const newTweet = {
