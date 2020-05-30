@@ -10,6 +10,8 @@ describe('GET /', (
   it('test users', async() => {   
     const result = await chai.request(app).get('/users');
     expect(result.status).to.be.equal(200);
+    expect(result.body).to.be.instanceOf(Array);
+    expect(result.body).to.has.lengthOf(0);
   })
 
   
