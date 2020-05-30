@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node bin/www",
     "pretest": "rm -rf coverage",
-    "test": "nyc --reporter=html mocha test --timeout=1000"
+    "test": "nyc --reporter=html --reporter=text mocha test --timeout=5000"
   },
   "author": "Daniele Manni",
   "license": "ISC",
