@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "stable"
+  - stable
 services:
   - mongodb
 script:
@@ -11,4 +11,4 @@ deploy:
   provider: heroku
   app: unict
   api_key:
-    secure: b2d0451f-f004-488e-90a9-3cc8eb8bfb9f
+    secure: 0lL9LZn5lzfi34KQWv29jfJFSxVMckOcV2aO38vL7b2qtwqKE6XfDztM3YtEFK30MpqyKhZQLALmycCt1c0VUXltWbbkxW1wS/I99eoEgvR5891HG7mJEzw5jVyoBb+iDmLBtxI58FsP6lHkYlRWftHyz3ALeQ/ifttu8o/odIcszMRATZXE4YqG+p5wCx+ioWKNLbU4MSjF0HIygcShuKHXyHi5p79JpJElG7eIsWeAKCuTiIxwdqhHjOCNb1LH11lWOhbs8//hA8wFv3TfbSwu4uBLYpL6/Hu7mrELiDXdGh6hVDfRn1znf9W1OstkVeq7DmNkLzMSp58G406/Fug18QZS59Un7JeucU587r3iqOB8rmEbRjBOz3+IaaowGUtuHHCsVq3nQwCF/HvyDRLTqVHIn+GcQVlcYeif6dTC4txPSnN3iMpVORBurA8O4MvSL2X6EFYx110mwyAIqX7bpDRUbLiwfrv3KvwKrZlCAJ6a12aJJ3mOScFFGJUySLf8hj+vbYfsw8FZWs2I/+cC5CB0nkiWXCp4EPu0dlA3sY/z9tRF9xQVHhQRSYSwuN3MsF/RWaOl98gWDvLw1NdbZdTjvcz+5GcKybZCm+gB50AEoBcs8gMOuAr88X/qsxiHhe2p6oDDbiv2++P3J/by64Mms7yfUUDl/RK519c=
