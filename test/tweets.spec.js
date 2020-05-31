@@ -6,7 +6,7 @@ const { expect } = chai;
 
 chai.use(chaiHttp);
 
-describe("GET: /users", () => {
+describe("GET: /tweets", () => {
   it("Empty Array if no tweets are found", async () => {
     const { body } = await chai.request(app).get("/tweets");
     expect(body).to.be.instanceOf(Array);
