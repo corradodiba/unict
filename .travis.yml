@@ -7,3 +7,8 @@ script:
   - npm test
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+deploy:
+  provider: heroku
+  app: unict
+  api_key:
+    secure: b2d0451f-f004-488e-90a9-3cc8eb8bfb9f
