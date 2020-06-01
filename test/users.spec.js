@@ -39,7 +39,6 @@ describe.only('POST /', () => {
         password: "outtatime"
       }
 
-      // cryptedPassword = crypto.createHash('sha256').digest(user.password).toString('base64');
       cryptedPassword = new Buffer(
         crypto.createHash('sha256').update(user.password, 'utf8').digest()
       ).toString('base64');
