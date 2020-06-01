@@ -13,8 +13,4 @@ describe('GET /', (
     expect(result.body).to.be.instanceOf(Array);
     expect(result.body).to.has.lengthOf(0);
   })
-
-  
-
 ));
-
