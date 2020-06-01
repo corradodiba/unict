@@ -6,6 +6,7 @@ const { expect } = chai;
 const mongoose = require("mongoose");
 const { fakeLogin } = require("./utils/fakeLogin");
 const User = require("../models/user");
+const Tweet = require("../models/tweet");
 const { accessToken } = require("./utils/getAccessToken");
 chai.use(chaiHttp);
 
@@ -73,6 +74,76 @@ describe("[DELETE] /tweets/:id", () => {
       expect(result.body).to.be.deep.equals({
         message: "Tweet successfully deleted",
       });
+    });
+  });
+});
+
+describe("[Create] /tweets", () => {
+  const token = accessToken();
+
+  describe("Creating invalid tweet", () => {
+    it("check if tweet length is lower min: 1", async () => {
+      const incorrectMinLengthTweet = "";
+      const result = await chai
+        .request(app)
+        .post("/tweets")
+        .send({
+          tweet: incorrectMinLengthTweet,
+        })
+        .set("authorization", token);
+      expect(result).to.have.property("status", 400);
+      expect(result.body).to.have.property("errors");
+      expect(result.body.errors).instanceOf(Array);
+    });
+    it("check if tweet length is greater max: 120", async () => {
+      const incorrectMaxLengthTweet = Array(200).join("t");
+      const result = await chai
+        .request(app)
+        .post("/tweets")
+        .send({
+          tweet: incorrectMaxLengthTweet,
+        })
+        .set("authorization", token);
+      expect(result).to.have.property("status", 400);
+      expect(result.body).to.have.property("errors");
+      expect(result.body.errors).instanceOf(Array);
+    });
+  });
+
+  describe("Creating a valid Tweet", () => {
+    const password = "mySecretPW";
+    let token = undefined;
+    let user = undefined;
+    let createdTweet = undefined;
+    before("creating a new user", async () => {
+      user = await User.create({
+        name: "Corrado",
+        surname: "Dibattista",
+        email: "corradodiba@test.it",
+        password,
+      });
+      const { accessToken } = await fakeLogin(user.email, password);
+      token = accessToken;
+    });
+    after("removing user created", async () => {
+      user ? user.remove() : console.log("user not found!");
+      createdTweet
+        ? await Tweet.findByIdAndDelete(createdTweet._id.toString())
+        : console.log("tweet not found!");
+    });
+    it("check valid tweet", async () => {
+      const validTweet = "I'm a valid tweet";
+      const result = await chai
+        .request(app)
+        .post("/tweets")
+        .send({
+          tweet: validTweet,
+        })
+        .set("authorization", `Bearer ${token}`);
+      expect(result).to.have.property("status", 201);
+      expect(result.body).to.has.property("_id");
+      expect(result.body).to.has.property("tweet", validTweet);
+      createdTweet = await Tweet.findById(result.body._id);
     });
   });
 });
